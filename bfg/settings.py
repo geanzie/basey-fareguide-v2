@@ -126,6 +126,10 @@ USE_I18N = True
 USE_TZ = True
 
 if not DEBUG:
+    # Proxy configuration for Railway
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    
+    # Security settings
     SECURE_SSL_REDIRECT = True
     SECURE_HSTS_SECONDS = 31536000
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
