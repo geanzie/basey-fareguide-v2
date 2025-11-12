@@ -37,6 +37,9 @@ RUN npm run build
 # Move back to app root
 WORKDIR /app
 
+# Create staticfiles directory
+RUN mkdir -p /app/staticfiles
+
 # Copy and set permissions for startup script
 COPY start.sh /app/start.sh
 RUN chmod +x /app/start.sh
