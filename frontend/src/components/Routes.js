@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './Routes.css';
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || 
@@ -20,15 +20,7 @@ const Routes = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  useEffect(() => {
-    loadLocations();
-  }, []);
-
-  useEffect(() => {
-    loadRoutes();
-  }, [page, filters]);
-
-  const loadLocations = async () => {
+  const loadLocations = useCallback(async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/locations/`);
       const data = await response.json();
@@ -36,9 +28,9 @@ const Routes = () => {
     } catch (err) {
       console.error('Failed to load locations:', err);
     }
-  };
+  }, []);
 
-  const loadRoutes = async () => {
+  const loadRoutes = useCallback(async () => {
     setLoading(true);
     setError('');
     
@@ -62,7 +54,15 @@ const Routes = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [page, filters]);
+
+  useEffect(() => {
+    loadLocations();
+  }, [loadLocations]);
+
+  useEffect(() => {
+    loadRoutes();
+  }, [loadRoutes]);
 
   const handleFilterChange = (e) => {
     setFilters({
