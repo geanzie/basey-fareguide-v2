@@ -5,6 +5,7 @@ class TransportType(models.TextChoices):
     TRICYCLE = 'TRICYCLE', 'Tricycle'
     JEEPNEY = 'JEEPNEY', 'Jeepney'
     MOTORCYCLE = 'MOTORCYCLE', 'Motorcycle'
+    HABAL_HABAL = 'HABAL_HABAL', 'Habal-Habal'
     VAN = 'VAN', 'Van'
     BOAT = 'BOAT', 'Boat'
 
