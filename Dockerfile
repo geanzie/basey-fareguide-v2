@@ -37,11 +37,10 @@ RUN npm run build
 # Move back to app root
 WORKDIR /app
 
-# Collect static files (includes React build)
-RUN python manage.py collectstatic --noinput
-
 # Expose port
 EXPOSE 8000
 
-# Run gunicorn
-CMD gunicorn bfg.wsgi:application --bind 0.0.0.0:$PORT --workers 3 --timeout 120
+# Create startup script that collects static files then runs gunicorn
+# This ensures environment variables are available
+CMD python manage.py collectstatic --noinput && \
+    gunicorn bfg.wsgi:application --bind 0.0.0.0:$PORT --workers 3 --timeout 120
