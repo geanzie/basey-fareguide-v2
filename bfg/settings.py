@@ -206,6 +206,12 @@ CORS_ALLOWED_ORIGINS = [
     "https://basey-fareguide-v2.vercel.app",
 ]
 
+# Parse additional CORS origins from environment variable (comma-separated)
+cors_origins_env = config('CORS_EXTRA_ALLOWED_ORIGINS', default='', cast=str)
+if cors_origins_env:
+    additional_origins = [origin.strip() for origin in cors_origins_env.split(',') if origin.strip()]
+    CORS_ALLOWED_ORIGINS.extend(additional_origins)
+
 # Add localhost only in development
 if DEBUG:
     CORS_ALLOWED_ORIGINS += [
@@ -213,8 +219,8 @@ if DEBUG:
         "http://127.0.0.1:3000",
     ]
 
-# In production, you may want to use CORS_ALLOW_ALL_ORIGINS = True for testing
-# but it's better to specify exact origins for security
+# For debugging CORS issues, you can temporarily enable this (NOT for production)
+# CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = [
@@ -236,6 +242,15 @@ CORS_ALLOW_HEADERS = [
     'x-csrftoken',
     'x-requested-with',
 ]
+
+# Expose headers to the browser
+CORS_EXPOSE_HEADERS = [
+    'Content-Type',
+    'X-CSRFToken',
+]
+
+# Cache preflight requests for 1 hour
+CORS_PREFLIGHT_MAX_AGE = 3600
 
 # Google Maps API Keys
 # Client-side key (with HTTP referrer restrictions)

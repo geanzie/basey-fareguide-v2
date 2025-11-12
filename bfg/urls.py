@@ -51,9 +51,20 @@ def api_root(request):
         }
     })
 
+# CORS Test view
+def cors_test(request):
+    """Test endpoint to check CORS headers"""
+    from django.http import HttpResponse
+    response = HttpResponse("CORS is working!")
+    response['X-Test-Header'] = 'CORS-OK'
+    return response
+
 urlpatterns = [
     # Admin
     path("admin/", admin.site.urls),
+    
+    # CORS Test endpoint
+    path('v2/cors-test/', cors_test, name='cors-test'),
     
     # Authentication endpoints
     path('v2/auth/register/', auth_views.register_user, name='register'),
