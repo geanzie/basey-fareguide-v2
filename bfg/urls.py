@@ -6,7 +6,8 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
-from django.views.generic import RedirectView, TemplateView
+from django.views.generic import RedirectView
+from django.http import JsonResponse
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenRefreshView
 
@@ -32,6 +33,24 @@ router.register(r'locations', LocationViewSet, basename='location')
 router.register(r'routes', RouteViewSet, basename='route')
 router.register(r'fares', FareViewSet, basename='fare')
 
+# API Root view
+def api_root(request):
+    """API root endpoint - returns available API endpoints"""
+    return JsonResponse({
+        'message': 'Basey Fare Guide API',
+        'version': 'v2',
+        'status': 'online',
+        'endpoints': {
+            'auth': '/v2/auth/',
+            'locations': '/v2/locations/',
+            'routes': '/v2/routes/',
+            'fares': '/v2/fares/',
+            'users': '/v2/users/',
+            'vehicles': '/v2/vehicles/',
+            'admin': '/admin/',
+        }
+    })
+
 urlpatterns = [
     # Admin
     path("admin/", admin.site.urls),
@@ -49,14 +68,12 @@ urlpatterns = [
     
     # API routes from router
     path('v2/', include(router.urls)),
+    
+    # Root endpoint - API status
+    path('', api_root, name='api-root'),
 ]
 
 # Media files (for development)
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
-# Serve React App - catch-all pattern (should be last)
-urlpatterns += [
-    re_path(r'^.*$', TemplateView.as_view(template_name='index.html'), name='react-app'),
-]
