@@ -34,8 +34,9 @@ Thumbs.db
 .git/
 .gitignore
 
-# Frontend (will be deployed separately)
-frontend/
+# Frontend build artifacts (we'll build inside Docker)
+frontend/node_modules/
+frontend/build/
 
 # Documentation
 docs/
