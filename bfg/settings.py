@@ -10,9 +10,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY', default="django-insecure-n1lolh=*)kk^a%napieym@514&i0bht-=lztxh0g!a*jc9f0^&")
 
-DEBUG = config('DEBUG', default=True, cast=bool)
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=lambda v: [s.strip() for s in v.split(',')])
+# Parse ALLOWED_HOSTS from environment variable or use defaults
+allowed_hosts_str = config('ALLOWED_HOSTS', default='localhost,127.0.0.1,web-production-8fd2c.up.railway.app,.railway.app')
+ALLOWED_HOSTS = [s.strip() for s in allowed_hosts_str.split(',') if s.strip()]
+
+# Add Railway public domain if available
+railway_domain = config('RAILWAY_PUBLIC_DOMAIN', default='')
+if railway_domain and railway_domain not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append(railway_domain)
 
 # Application definition
 INSTALLED_APPS = [
