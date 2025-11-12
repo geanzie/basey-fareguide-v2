@@ -8,7 +8,7 @@
   "rewrites": [
     {
       "source": "/v2/:path*",
-      "destination": "https://your-railway-app.up.railway.app/v2/:path*"
+      "destination": "https://web-production-8fd2c.up.railway.app/v2/:path*"
     }
   ],
   "headers": [
