@@ -25,6 +25,9 @@ const Navbar = () => {
             <Link to="/fare-calculator" className="navbar-link">Calculate Fare</Link>
           </li>
           <li className="navbar-item">
+            <Link to="/routes" className="navbar-link">Routes</Link>
+          </li>
+          <li className="navbar-item">
             <Link to="/locations" className="navbar-link">Locations</Link>
           </li>
           {isAuthenticated ? (

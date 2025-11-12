@@ -7,6 +7,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import FareCalculator from './components/FareCalculator';
 import Locations from './components/Locations';
+import RoutesPage from './components/Routes';
 import Profile from './components/Profile';
 import PrivateRoute from './components/PrivateRoute';
 import './App.css';
@@ -23,6 +24,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/fare-calculator" element={<FareCalculator />} />
             <Route path="/locations" element={<Locations />} />
+            <Route path="/routes" element={<RoutesPage />} />
             <Route
               path="/profile"
               element={
