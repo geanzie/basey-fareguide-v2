@@ -1,1 +1,1 @@
-web: gunicorn bfg.wsgi --log-file -
+web: sh start.sh
