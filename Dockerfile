@@ -37,10 +37,12 @@ RUN npm run build
 # Move back to app root
 WORKDIR /app
 
+# Copy and set permissions for startup script
+COPY start.sh /app/start.sh
+RUN chmod +x /app/start.sh
+
 # Expose port
 EXPOSE 8000
 
-# Create startup script that collects static files then runs gunicorn
-# This ensures environment variables are available
-CMD python manage.py collectstatic --noinput && \
-    gunicorn bfg.wsgi:application --bind 0.0.0.0:$PORT --workers 3 --timeout 120
+# Use startup script
+CMD ["/app/start.sh"]
