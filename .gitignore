@@ -78,5 +78,16 @@ Thumbs.db
 *.key
 !frontend/public/manifest.json
 
-# Documentation with sensitive data
-DATABASE_SETUP_COMPLETE.md
+# Development-only files (not needed in production)
+start-dev.bat
+start-dev.ps1
+
+# Data files (location data already in database)
+basey-locations.json
+
+# Package lock files (should be generated per environment)
+/package-lock.json
+
+# Root public and src are duplicates (real ones are in frontend/)
+/public/
+/src/

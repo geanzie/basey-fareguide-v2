@@ -1,108 +1,215 @@
-# Basey Fare Guide 2.0 - Django REST API + React Frontend
+# Basey Fare Guide 2.0# Basey Fare Guide 2.0 - Django REST API + React Frontend
 
-Full-stack tricycle fare calculation system with Django REST API backend and React frontend.
 
-## ⚠️ SECURITY NOTICE - READ BEFORE CLONING
 
-**IMPORTANT:** This repository does NOT include `.env` files with API keys and secrets.
+Full-stack tricycle fare calculation system for Basey, Samar.Full-stack tricycle fare calculation system for Basey, Samar with Django REST API backend and React frontend.
 
-Before running this project:
-1. **Copy `.env.example` to `.env`** in both root and frontend directories
-2. **Fill in your own API keys and secrets** (see [docs/guides/SECURITY.md](docs/guides/SECURITY.md))
-3. **NEVER commit `.env` files** - they are gitignored for security
-4. See the [Security Guidelines](docs/guides/SECURITY.md) for detailed setup instructions
 
-## 📚 Documentation
 
-All documentation has been organized in the `docs/` directory. See **[docs/INDEX.md](docs/INDEX.md)** for a complete guide to all available documentation.
+## 🚀 Quick Start## ⚠️ SECURITY NOTICE
 
-## 🎯 Tech Stack
 
-- **Backend**: Django 5.2 + Django REST Framework
+
+```bashThis repository does NOT include `.env` files with API keys and secrets.
+
+# Clone
+
+git clone https://github.com/geanzie/basey-fareguide-v2.gitBefore running:
+
+cd basey-fareguide-v21. Copy `.env.example` to `.env` and fill in your API keys
+
+2. **NEVER commit `.env` files** - they are gitignored
+
+# Setup backend3. Generate new SECRET_KEY for production
+
+python -m venv BFG-env
+
+BFG-env\Scripts\activate## 📚 Documentation
+
+pip install -r requirements.txt
+
+- **[Quick Start](docs/QUICKSTART.md)** - Setup & run locally
+
+# Configure (copy .env.example to .env and fill in keys)- **[API Guide](docs/API.md)** - Complete API reference
+
+cp .env.example .env- **[Deployment](docs/DEPLOYMENT.md)** - Deploy to production
+
+
+
+# Initialize database## 🎯 Tech Stack
+
+python manage.py migrate
+
+python populate_database.py- **Backend**: Django 5.2 + Django REST Framework
+
 - **Frontend**: React 18 with React Router
-- **Database**: PostgreSQL 12+
-- **Authentication**: JWT (Simple JWT)
+
+# Run backend- **Database**: PostgreSQL 12+
+
+python manage.py runserver- **Authentication**: JWT (Simple JWT)
+
 - **APIs**: Google Maps Distance Matrix & Directions API
-- **Styling**: Modern CSS3 with gradients and animations
 
-## 🚀 Features Implemented
+# Setup frontend (new terminal)- **Styling**: Modern CSS3 with gradients and animations
 
-### Frontend (React)
+cd frontend
+
+npm install## 🚀 Features Implemented
+
+npm start
+
+```### Frontend (React)
+
 - ✅ **Modern UI/UX** - Responsive design with smooth animations
-- ✅ **User Authentication** - Login, register, and profile management
-- ✅ **Fare Calculator** - Interactive fare calculation interface
-- ✅ **Location Browser** - Search and filter locations
+
+Backend: http://localhost:8000  - ✅ **User Authentication** - Login, register, and profile management
+
+Frontend: http://localhost:3000  - ✅ **Fare Calculator** - Interactive fare calculation interface
+
+Admin: http://localhost:8000/admin- ✅ **Location Browser** - Search and filter locations
+
 - ✅ **User Dashboard** - Profile and fare calculation history
-- ✅ **Protected Routes** - Role-based access control
+
+## 📚 Documentation- ✅ **Protected Routes** - Role-based access control
+
 - ✅ **Auto Token Refresh** - Seamless authentication experience
 
-### Backend (Django REST API)
+- **[Quick Start Guide](docs/QUICKSTART.md)** - Detailed setup instructions
+
+- **[API Reference](docs/API.md)** - Complete API documentation### Backend (Django REST API)
+
+- **[Deployment Guide](docs/DEPLOYMENT.md)** - Production deployment
 
 #### Core Functionality
-- ✅ **Fare Calculation System** - Based on Municipal Ordinance 105 Series of 2023
+
+## ⚙️ Tech Stack- ✅ **Fare Calculation System** - Based on Municipal Ordinance 105 Series of 2023
+
   - Base fare: ₱15.00 (first 3km)
-  - Additional rate: ₱3.00/km beyond 3km
-  - Automatic rounding to nearest ₱0.50
-  - 20% discount for Senior Citizens, PWDs, and Students
+
+**Backend:** Django 5.2, Django REST Framework, PostgreSQL    - Additional rate: ₱3.00/km beyond 3km
+
+**Frontend:** React 18, React Router    - Automatic rounding to nearest ₱0.50
+
+**Auth:** JWT (Simple JWT)    - 20% discount for Senior Citizens, PWDs, and Students
+
+**APIs:** Google Maps (Distance Matrix & Directions)
 
 - ✅ **Google Maps Integration**
-  - Distance Matrix API for accurate route distances
+
+## ✨ Features  - Distance Matrix API for accurate route distances
+
   - Directions API for detailed polylines
-  - GPS fallback using Haversine formula
 
-- ✅ **Discount Card Management**
-  - Card application with ID upload
-  - Admin verification workflow
-  - Automatic discount application
-  - Usage tracking and logging
+- 🧮 Accurate fare calculation based on Municipal Ordinance 105 Series 2023  - GPS fallback using Haversine formula
 
-- ✅ **Incident Reporting System**
+- 📍 Real-time GPS distance measurement via Google Maps
+
+- 💳 Discount card system (20% for Seniors, PWDs, Students)- ✅ **Discount Card Management**
+
+- 🚨 Incident reporting system  - Card application with ID upload
+
+- 👥 Role-based access (Admin, Driver, Public User)  - Admin verification workflow
+
+- 📱 Responsive mobile-friendly interface  - Automatic discount application
+
+- 🔐 Secure JWT authentication  - Usage tracking and logging
+
+
+
+## 🎯 Fare Calculation- ✅ **Incident Reporting System**
+
   - Multiple incident types (overcharging, reckless driving, etc.)
-  - Evidence file uploads
-  - GPS coordinates capture
-  - Admin review and resolution
+
+- **Base fare:** ₱15.00 (first 3km)  - Evidence file uploads
+
+- **Additional:** ₱3.00/km beyond 3km  - GPS coordinates capture
+
+- **Rounding:** Nearest ₱0.50  - Admin review and resolution
+
+- **Discounts:** 20% for Senior Citizens, PWDs, and Students
 
 - ✅ **JWT Authentication**
-  - Secure token-based authentication
+
+## 🔒 Security  - Secure token-based authentication
+
   - Token refresh mechanism
-  - Role-based access control (Admin, Moderator, Driver, Public User)
 
-### Models (Complete Database Schema)
-- **User** - Custom user model with roles
+- Never commit `.env` files  - Role-based access control (Admin, Moderator, Driver, Public User)
+
+- Generate new `SECRET_KEY` for production
+
+- Use environment variables for all secrets### Models (Complete Database Schema)
+
+- Enable HTTPS in production (`DEBUG=False`)- **User** - Custom user model with roles
+
 - **Vehicle** - Driver vehicle registration
-- **DiscountCard** - Discount eligibility cards
+
+## 📂 Project Structure- **DiscountCard** - Discount eligibility cards
+
 - **DiscountUsageLog** - Track discount usage
-- **Incident** - Incident reports
-- **FareCalculation** - Historical fare calculations
-- **Location** - Barangay and landmark locations
-- **Route** - Transportation routes
-- **Fare** - Fare pricing by route and passenger type
 
-## 📦 Installation & Setup
+```- **Incident** - Incident reports
 
-### Prerequisites
-- Python 3.10+
-- PostgreSQL 12+
+basey-fareguide-v2/- **FareCalculation** - Historical fare calculations
+
+├── bfg/              # Django settings- **Location** - Barangay and landmark locations
+
+├── fares/            # Fare calculation logic- **Route** - Transportation routes
+
+├── locations/        # Locations management- **Fare** - Fare pricing by route and passenger type
+
+├── routes/           # Routes & distance calculation
+
+├── users/            # Authentication & user management## 📦 Installation & Setup
+
+├── frontend/         # React application
+
+├── docs/             # Documentation### Prerequisites
+
+└── populate_database.py  # Database setup script- Python 3.10+
+
+```- PostgreSQL 12+
+
 - Google Maps API Key (with Distance Matrix & Directions APIs enabled)
+
+## 🤝 Contributing
 
 ### 1. Database Setup
 
-Create PostgreSQL database:
-```sql
-CREATE DATABASE basey_fare_guide;
+1. Fork the repository
+
+2. Create feature branch (`git checkout -b feature/AmazingFeature`)Create PostgreSQL database:
+
+3. Commit changes (`git commit -m 'Add AmazingFeature'`)```sql
+
+4. Push to branch (`git push origin feature/AmazingFeature`)CREATE DATABASE basey_fare_guide;
+
+5. Open Pull Request```
+
+
+
+## 📝 LicenseOr using PowerShell:
+
+```powershell
+
+This project is developed for the Municipality of Basey, Samar.psql -U postgres -c "CREATE DATABASE basey_fare_guide;"
+
 ```
 
-Or using PowerShell:
-```powershell
-psql -U postgres -c "CREATE DATABASE basey_fare_guide;"
-```
+## 🐛 Issues
 
 ### 2. Environment Configuration
 
+Report issues at: https://github.com/geanzie/basey-fareguide-v2/issues
+
 **⚠️ CRITICAL: Follow these steps exactly to avoid exposing secrets**
 
+---
+
 #### Backend Environment Setup
-```powershell
+
+**Made with ❤️ for Basey, Samar**```powershell
+
 # In the project root directory
 cp .env.example .env
 ```

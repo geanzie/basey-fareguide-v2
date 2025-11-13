@@ -1,6 +1,10 @@
 """
 Script to create sample data for Basey Fare Guide
 Populates database with test locations, routes, and sample data
+
+WARNING: This script creates development users with default passwords.
+         DO NOT use these credentials in production!
+         Change passwords after running in production environment.
 """
 import os
 import django
